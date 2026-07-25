@@ -1,3 +1,55 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600&family=Inter:wght@400;500&display=swap');
 
 @import 'tailwindcss';
+
+:root {
+    --font-plus-jakarta: 'Plus Jakarta Sans';
+    --font-inter: 'Inter';
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-plus-jakarta);
+}
+
+span,
+p,
+a {
+    font-family: var(--font-inter);
+}
+
+
+
+
+
+
+/* ==========================================
+TÍTULOS Y DISPLAY (Plus Jakarta Sans)
+========================================== */
+.title-display-lg {
+    @apply text-[32px] leading-[1.2] tracking-[-0.01em] font-semibold md:text-[48px] md:leading-[1.1] md:tracking-[-0.02em];
+}
+
+.title-headline-md {
+    @apply text-[24px] leading-[1.3] font-medium;
+}
+
+.title-headline-sm {
+    @apply text-[20px] leading-[1.4] font-medium;
+}
+
+/* ==========================================
+TEXTO DE CUERPO Y ETIQUETAS (Inter)
+========================================== */
+.text-body-lg {
+    @apply text-[18px] leading-[1.6] font-normal;
+}
+
+.text-body-md {
+    @apply text-[16px] leading-normal font-normal;
+}
+
+.text-label-sm {
+    @apply text-[14px] leading-none tracking-wider font-medium;
+}

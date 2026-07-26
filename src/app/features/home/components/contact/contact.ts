@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Info } from './info.interface';
+import { Info } from '@src/app/features/home/components/contact/info.interface';
 
 @Component({
     selector: 'app-contact',

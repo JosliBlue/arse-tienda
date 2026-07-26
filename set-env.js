@@ -6,9 +6,8 @@ const targetPath = './src/env.ts';
 // Leemos las variables del sistema (process.env)
 // Si no existen en el hosting, usamos valores por defecto
 const envConfigFile = `export const env = {
+    appName: '${process.env.APP_NAME || 'Nombre de la app'}',
     production: ${process.env.APP_PROD_ENV || 'false'},
-    apiUrl: '${process.env.API_URL || 'http://localhost/api'}',
-    leagueName: '${process.env.LEAGUE_NAME || 'Nombre desde set-env'}',
     firebaseConfig: {
         apiKey: '${process.env.FIREBASE_API_KEY || ''}',
         authDomain: '${process.env.FIREBASE_AUTH_DOMAIN || ''}',

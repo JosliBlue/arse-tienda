@@ -1,10 +1,11 @@
 import { Component, signal } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
     selector: 'app-header',
-    imports: [],
+    imports: [RouterLink, RouterLinkActive],
     templateUrl: './header.html',
-    styleUrl: './header.css',
+    styles: ``,
 })
 export class Header {
     title = signal('ARSE');

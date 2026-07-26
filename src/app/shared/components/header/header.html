@@ -1,17 +1,26 @@
-<header class="px-5 py-3 md:p-5 border-b border-gray-300 shadow-xs">
-    <nav class="max-w-7xl m-auto flex justify-between items-center">
+<header class="fixed w-full bg-gray-50 px-5 py-4  border-b border-gray-300 shadow-xs z-50">
+    <nav class="max-w-6xl m-auto flex justify-between items-center">
         <div>
             <img src="/ArseAccesorios.png" class="block md:hidden size-14" />
             <h1 class="hidden md:block text-4xl md:text-5xl font-semibold tracking-tight">
                 {{ title() }}
             </h1>
         </div>
-        <div class="flex gap-5 md:gap-8 text-purple-800">
-            <a href="" class="flex items-center gap-1 p-1 border-b-2">
+        <div class="flex gap-5 md:gap-8 text-violet-700">
+            <a
+                class="flex items-center gap-1 p-1 transition-colors hover:text-purple-500"
+                routerLink=""
+                routerLinkActive="border-b-2"
+                [routerLinkActiveOptions]="{ exact: true }"
+            >
                 <span class="icon-[fluent--home-48-filled] size-8 md:size-5"></span>
                 <span class="hidden md:block">Principal</span>
             </a>
-            <a href="" class="flex items-center gap-1 p-1">
+            <a
+                class="flex items-center gap-1 p-1 transition-colors hover:text-purple-500"
+                routerLink="catalog"
+                routerLinkActive="border-b-2"
+            >
                 <span class="icon-[boxicons--grid-filled] size-8 md:size-5"></span>
                 <span class="hidden md:block">Colección</span>
             </a>

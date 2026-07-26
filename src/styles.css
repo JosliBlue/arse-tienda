@@ -6,21 +6,18 @@
 :root {
     --font-plus-jakarta: 'Plus Jakarta Sans';
     --font-inter: 'Inter';
+    --colorsito: #1c014b;
 }
 
 h1,
 h2,
 h3 {
     font-family: var(--font-plus-jakarta);
-    color: rgb(28, 1, 75);
+    color: var(--colorsito);
 }
 
 span,
 p,
 a {
     font-family: var(--font-inter);
-}
-
-p {
-    @apply md:text-lg;
 }

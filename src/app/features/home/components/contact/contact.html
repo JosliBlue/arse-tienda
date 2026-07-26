@@ -1,0 +1,29 @@
+<section class="bg-white py-8 px-5 md:px-0">
+    <div class="max-w-6xl m-auto">
+        <h2 class="text-2xl pb-4">Nuestra información</h2>
+        <div class="grid md:grid-cols-2 gap-8 md:gap-14">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3988.8679095576786!2d-78.618268!3d-1.25062!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMcKwMTUnMDIuMiJTIDc4wrAzNycwNS44Ilc!5e0!3m2!1ses-419!2sec!4v1785034449912!5m2!1ses-419!2sec"
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"
+                class="w-full h-60 rounded-2xl"
+            ></iframe>
+            <div class="grid md:grid-cols-2 md:grid-rows-2 md:gap-x-10 gap-y-8 md:gap-y-4">
+                @for (info of infos; track info.id) {
+                    <div class="flex gap-2">
+                        <div
+                            class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-(--colorsito)"
+                        >
+                            <span class="text-white size-6 {{ info.icon }}"></span>
+                        </div>
+                        <div>
+                            <p class="mb-2">{{ info.title }}</p>
+                            <p class="md:text-sm text-gray-600">{{ info.subtitle }}</p>
+                            <p class="md:text-xs text-gray-600">{{ info.subsubtitle }}</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

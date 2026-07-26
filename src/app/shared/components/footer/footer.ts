@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-hero',
+    selector: 'app-footer',
     imports: [],
-    templateUrl: './hero.html',
+    templateUrl: './footer.html',
     styles: ``,
 })
-export class Hero {}
+export class Footer {}

@@ -1,5 +1,5 @@
 export interface Info {
-    id: number,
+    id: number;
     title: string;
     icon: string;
     subtitle: string;

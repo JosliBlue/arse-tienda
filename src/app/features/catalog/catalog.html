@@ -1,1 +1,89 @@
-<p>catalog works!</p>
+<section class="min-h-screen bg-gray-50 py-8 px-5 md:px-0">
+    <div class="max-w-6xl m-auto">
+        <!-- Encabezado -->
+        <div class="mb-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">Nuestra Colección</h2>
+            <p class="mt-2 text-gray-500">Encuentra los accesorios perfectos para ti</p>
+        </div>
+
+        <!-- Filtros -->
+        <div class="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <!-- Búsqueda -->
+            <div class="relative w-full md:w-80">
+                <span
+                    class="icon-[mdi--magnify] absolute left-3 top-1/2 -translate-y-1/2 size-5 text-gray-400"
+                ></span>
+                <input
+                    type="text"
+                    placeholder="Buscar productos..."
+                    (input)="onSearch($event)"
+                    class="w-full rounded-full border border-gray-300 bg-white py-2.5 pl-10 pr-4 text-sm text-gray-700 outline-none transition-all duration-200 focus:border-violet-500 focus:ring-2 focus:ring-violet-100"
+                />
+            </div>
+
+            <!-- Categorías -->
+            <div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
+                <button
+                    (click)="selectCategory(null)"
+                    class="shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200"
+                    [class]="
+                        selectedCategoryId() === null
+                            ? 'text-white shadow-md'
+                            : 'bg-white text-gray-600 border border-gray-300 hover:border-gray-400'
+                    "
+                    [style.background-color]="selectedCategoryId() === null ? 'var(--colorsito)' : ''"
+                >
+                    Todos
+                </button>
+                @for (cat of categories(); track cat.id) {
+                    <button
+                        (click)="selectCategory(cat.id)"
+                        class="shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200"
+                        [class]="
+                            selectedCategoryId() === cat.id
+                                ? 'text-white shadow-md'
+                                : 'bg-white text-gray-600 border border-gray-300 hover:border-gray-400'
+                        "
+                        [style.background-color]="
+                            selectedCategoryId() === cat.id ? 'var(--colorsito)' : ''
+                        "
+                    >
+                        {{ cat.name }}
+                    </button>
+                }
+            </div>
+        </div>
+
+        <!-- Loading -->
+        @if (loading()) {
+            <div class="flex items-center justify-center py-20">
+                <div class="loader"></div>
+            </div>
+        } @else if (filteredProducts().length === 0) {
+            <!-- Sin resultados -->
+            <div class="flex flex-col items-center justify-center py-20 text-center">
+                <span class="icon-[mdi--magnify-close] size-16 text-gray-300"></span>
+                <p class="mt-4 text-lg text-gray-500">No se encontraron productos</p>
+                <p class="mt-1 text-sm text-gray-400">Intenta con otros filtros o búsqueda</p>
+            </div>
+        } @else {
+            <!-- Grid de productos -->
+            <div
+                class="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6 lg:gap-8 animate-fade-in"
+            >
+                @for (product of filteredProducts(); track product.id) {
+                    <app-product-card
+                        [product]="product"
+                        [categoryName]="getCategoryName(product.category_id)"
+                    />
+                }
+            </div>
+
+            <!-- Contador -->
+            <p class="mt-8 text-center text-sm text-gray-400">
+                {{ filteredProducts().length }}
+                {{ filteredProducts().length === 1 ? 'producto' : 'productos' }}
+            </p>
+        }
+    </div>
+</section>

@@ -3,10 +3,10 @@
         <div class="loader"></div>
     </div>
 } @else if (product(); as p) {
-    <section class="bg-white py-8 px-5 md:px-0">
-        <div class="max-w-6xl m-auto">
+    <section class="bg-white px-4 py-6 sm:px-5 sm:py-8 md:px-0">
+        <div class="mx-auto w-full max-w-6xl">
             <!-- Breadcrumb -->
-            <nav class="mb-6 flex items-center gap-2 text-sm text-gray-400">
+            <nav class="mb-6 flex min-w-0 items-center gap-2 overflow-x-auto whitespace-nowrap text-sm text-gray-400">
                 <a routerLink="/" class="transition-colors hover:text-gray-600">Principal</a>
                 <span>/</span>
                 <a routerLink="/catalog" class="transition-colors hover:text-gray-600"
@@ -16,9 +16,9 @@
                 <span class="text-gray-700">{{ p.name }}</span>
             </nav>
 
-            <div class="grid gap-10 md:grid-cols-2">
+            <div class="grid min-w-0 gap-8 md:grid-cols-2 md:gap-10">
                 <!-- Galería de imágenes -->
-                <div class="flex flex-col gap-4">
+                <div class="flex min-w-0 flex-col gap-4">
                     <!-- Imagen principal -->
                     <div class="aspect-square overflow-hidden rounded-2xl bg-gray-100">
                         <img
@@ -52,7 +52,7 @@
                 </div>
 
                 <!-- Información del producto -->
-                <div class="flex flex-col gap-5">
+                <div class="flex min-w-0 flex-col gap-5">
                     <!-- Categoría -->
                     @if (categoryName()) {
                         <span
@@ -63,12 +63,12 @@
                     }
 
                     <!-- Nombre -->
-                    <h2 class="text-3xl md:text-4xl font-semibold tracking-tight leading-tight">
+                    <h2 class="break-words text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
                         {{ p.name }}
                     </h2>
 
                     <!-- Precio -->
-                    <div class="flex items-end gap-3">
+                    <div class="flex flex-wrap items-end gap-3">
                         @if (hasDiscount) {
                             <span class="text-3xl font-semibold" style="color: var(--colorsito)">
                                 {{ currentDiscountPrice | currency: 'USD' : 'symbol' : '1.2-2' }}
@@ -109,7 +109,7 @@
                                         [class.bg-gray-100]="isVariantOutOfStock(variant)"
                                         [class.text-gray-400]="isVariantOutOfStock(variant)"
                                         [class.line-through]="isVariantOutOfStock(variant)"
-                                        class="rounded-lg border px-4 py-2 text-sm transition-colors enabled:hover:border-violet-500 disabled:cursor-not-allowed"
+                                        class="max-w-full break-words rounded-lg border px-4 py-2 text-left text-sm transition-colors enabled:hover:border-violet-500 disabled:cursor-not-allowed"
                                     >
                                         {{ variant.name }}
                                         @if (isVariantOutOfStock(variant)) {
@@ -150,7 +150,7 @@
                         <h3 class="mb-2 text-sm font-semibold text-gray-500 uppercase tracking-wide">
                             Descripción
                         </h3>
-                        <p class="text-gray-600 leading-relaxed whitespace-pre-line">
+                        <p class="break-words whitespace-pre-line leading-relaxed text-gray-600">
                             {{ p.description }}
                         </p>
                     </div>

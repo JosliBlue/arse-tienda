@@ -41,17 +41,23 @@
             {{ product().name }}
         </h3>
 
+        @if (shouldShowVariantLabel) {
+            <p class="mt-1 text-xs text-gray-500">
+                {{ currentVariantType }}: {{ currentVariant.name }}
+            </p>
+        }
+
         <div class="mt-1.5 flex items-center gap-2">
             @if (hasDiscount) {
                 <span class="text-lg font-semibold" style="color: var(--colorsito)">
-                    {{ product().discount_price | currency: 'USD' : 'symbol' : '1.2-2' }}
+                    {{ currentDiscountPrice | currency: 'USD' : 'symbol' : '1.2-2' }}
                 </span>
                 <span class="text-sm text-gray-400 line-through">
-                    {{ product().price | currency: 'USD' : 'symbol' : '1.2-2' }}
+                    {{ currentPrice | currency: 'USD' : 'symbol' : '1.2-2' }}
                 </span>
             } @else {
                 <span class="text-lg font-semibold text-gray-900">
-                    {{ product().price | currency: 'USD' : 'symbol' : '1.2-2' }}
+                    {{ currentPrice | currency: 'USD' : 'symbol' : '1.2-2' }}
                 </span>
             }
         </div>

@@ -38,7 +38,7 @@ export class Catalog implements OnInit {
             );
         }
 
-        return result;
+        return result.filter((product) => this.isProductAvailable(product));
     });
 
     ngOnInit(): void {
@@ -65,5 +65,15 @@ export class Catalog implements OnInit {
         if (!categoryId) return '';
         const cat = this.categories().find((c) => c.id === categoryId);
         return cat?.name ?? '';
+    }
+
+    private isProductAvailable(product: Product): boolean {
+        if (product.variants?.length) {
+            return product.variants.some(
+                (variant) => !variant.is_stock || (variant.stock_quantity ?? 0) > 0,
+            );
+        }
+
+        return !product.is_stock || (product.stock_quantity ?? 0) > 0;
     }
 }

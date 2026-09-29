@@ -71,10 +71,10 @@
                     <div class="flex items-end gap-3">
                         @if (hasDiscount) {
                             <span class="text-3xl font-semibold" style="color: var(--colorsito)">
-                                {{ p.discount_price | currency: 'USD' : 'symbol' : '1.2-2' }}
+                                {{ currentDiscountPrice | currency: 'USD' : 'symbol' : '1.2-2' }}
                             </span>
                             <span class="text-lg text-gray-400 line-through">
-                                {{ p.price | currency: 'USD' : 'symbol' : '1.2-2' }}
+                                {{ currentPrice | currency: 'USD' : 'symbol' : '1.2-2' }}
                             </span>
                             <span
                                 class="rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700"
@@ -83,13 +83,46 @@
                             </span>
                         } @else {
                             <span class="text-3xl font-semibold text-gray-900">
-                                {{ p.price | currency: 'USD' : 'symbol' : '1.2-2' }}
+                                {{ currentPrice | currency: 'USD' : 'symbol' : '1.2-2' }}
                             </span>
                         }
                     </div>
 
+                    <!-- Variantes -->
+                    @for (group of variantsByType; track group.type) {
+                        <div>
+                            <h3 class="mb-2 text-sm font-semibold text-gray-700">
+                                {{ variantTypeLabel[group.type] }}
+                            </h3>
+                            <div class="flex flex-wrap gap-2">
+                                @for (variant of group.variants; track variant.id) {
+                                    <button
+                                        type="button"
+                                        (click)="selectVariant(variant)"
+                                        [disabled]="isVariantOutOfStock(variant)"
+                                        [attr.aria-label]="variant.name + (isVariantOutOfStock(variant) ? ' (agotado)' : '')"
+                                        [attr.aria-pressed]="selectedVariant()?.id === variant.id"
+                                        [class.border-violet-700]="selectedVariant()?.id === variant.id"
+                                        [class.bg-violet-50]="selectedVariant()?.id === variant.id"
+                                        [class.border-gray-300]="selectedVariant()?.id !== variant.id"
+                                        [class.border-gray-200]="isVariantOutOfStock(variant)"
+                                        [class.bg-gray-100]="isVariantOutOfStock(variant)"
+                                        [class.text-gray-400]="isVariantOutOfStock(variant)"
+                                        [class.line-through]="isVariantOutOfStock(variant)"
+                                        class="rounded-lg border px-4 py-2 text-sm transition-colors enabled:hover:border-violet-500 disabled:cursor-not-allowed"
+                                    >
+                                        {{ variant.name }}
+                                        @if (isVariantOutOfStock(variant)) {
+                                            <span class="ml-1 text-xs no-underline">(agotado)</span>
+                                        }
+                                    </button>
+                                }
+                            </div>
+                        </div>
+                    }
+
                     <!-- Stock -->
-                    @if (p.is_stock) {
+                    @if (currentStockControlled) {
                         <div class="flex items-center gap-2">
                             @if (isOutOfStock) {
                                 <span class="icon-[mdi--close-circle] size-5 text-red-500"></span>
@@ -100,9 +133,9 @@
                                 ></span>
                                 <span class="text-sm text-green-600">
                                     En stock
-                                    @if (p.stock_quantity !== null) {
-                                        ({{ p.stock_quantity }}
-                                        {{ p.stock_quantity === 1 ? 'unidad' : 'unidades' }})
+                                    @if (currentStockQuantity !== null) {
+                                        ({{ currentStockQuantity }}
+                                        {{ currentStockQuantity === 1 ? 'unidad' : 'unidades' }})
                                     }
                                 </span>
                             }
